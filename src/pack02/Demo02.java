@@ -1,10 +1,10 @@
 package pack02;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import domain.Point;
+import utils.DataUtils;
 
 /**
  * 牛顿插值法求解x=0.596出函数的取值
@@ -18,7 +18,6 @@ public class Demo02 {
     private static Point p3 = new Point(0.8, 0.8881);
     private static Point p4 = new Point(0.9, 1.0265);
     private static Point p5 = new Point(1.05, 1.2538);
-    private static Point px;
 
     static {
         list.add(p0);
@@ -31,13 +30,14 @@ public class Demo02 {
 
     //（0.4，0.4107）、（0.55,0.57815）、（0.65,0.69675）、（0.8，0.8881）（0.9,1.0265），（1.05，1.2538）
     public static void main(String[] args) {
-        px = new Point();
+        Point px = new Point();
         px.setX(0.596);
-        double res = exec();
-        System.out.println("结果是：" + handle(res));
+        double res = exec(px);
+        System.out.println("结果是：" + DataUtils.handle(res));
     }
 
-    public static double exec() {
+    public static double exec(Point px) {
+        //此处为牛顿插值公式
         double res = p0.getY();
         for (int i = 1; i < list.size(); i++) {
             Point[] f1 = new Point[i + 1];
@@ -69,12 +69,6 @@ public class Demo02 {
             }
             xs = (getXS(f1) - getXS(f2)) / (pos[0].getX() - pos[len - 1].getX());
         }
-        return (xs);
-    }
-
-    public static double handle(double i) {
-        BigDecimal b = new BigDecimal(i);
-        double f1 = b.setScale(5, BigDecimal.ROUND_HALF_UP).doubleValue();
-        return f1;
+        return xs;
     }
 }
