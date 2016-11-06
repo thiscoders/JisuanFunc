@@ -1,0 +1,39 @@
+package domain;
+
+/**
+ * 表示一个坐标点
+ * Created by ye on 11/6/16.
+ */
+public class Point {
+    public double x;
+    public double y;
+
+    public Point() {
+    }
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
+}
